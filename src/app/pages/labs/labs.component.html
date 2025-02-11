@@ -1,0 +1,60 @@
+<div class="container">
+  <ul>
+    <p>total: {{tasks().length}}</p>
+    <li *ngFor="let task of tasks(); index as i">
+      {{ i }} {{ task }}
+    </li>
+    <p>Hola soy {{ name() }}</p>
+  
+    <input type="text" [value]="name()">
+    <button [disabled]="disabled" (click)="clickHandler()">Click me</button>
+    <button [disabled]="disabled" (dblclick)="clickHandler()">double Click me</button>
+
+    <input type="text" (change)="changeHandler($event)">
+    <p>(keydown)</p>
+    <input type="text" (keydown)="keydownHandle($event)">
+    <p>(keydown) ENTER</p>
+    <input type="text" (keydown.shift.t)="changeHandler($event)">
+    <p>(Signals)</p>
+    <input type="text" [value]="name()" (change)="changeHandler($event)">
+    <p>name: {{ name() }}</p>
+  </ul>
+  <img [src]="person().avatar" alt="">
+  <input type="number" [value]="person().age">
+  <hr />
+
+  <div *ngIf="name() === 'Andres'">
+    Hola, soy Andres
+  </div>
+  <input type="text" [value]="person().name" (change)="changeName($event)">
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'Andres'">Soy Andres</p>
+    <p *ngSwitchCase="'Nicolas'">Soy Nicolas</p>
+    <p *ngSwitchCase="'Ana'">Soy Ana</p>
+    <p *ngSwitchDefault>yo no soy nadie</p>
+
+  </div>
+
+  <hr />
+  <input type="color" [formControl]="colorCtrl">
+  <p>color: {{ colorCtrl.value}}</p>
+
+  <svg>
+    <g>
+      <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value"/>
+    </g>
+  </svg>
+
+  <hr />
+
+  <input type="number" [formControl]="widthCtrl">
+  <span class="box" [style.width.px]="widthCtrl.value"></span>
+  <hr />
+  <p>
+    <input type="text" [formControl]="nameCtrl"> <br />
+    <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
+  </p>
+  <p>
+    <input type="text">
+  </p>
+</div>
