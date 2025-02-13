@@ -1,11 +1,13 @@
 <div class="container">
   <ul>
     <p>total: {{tasks().length}}</p>
-    <li *ngFor="let task of tasks(); index as i">
-      {{ i }} {{ task }}
-    </li>
+    @for (task of tasks(); track task; let i = $index) {
+      <li>
+        {{ i }} {{ task }}
+      </li>
+    }
     <p>Hola soy {{ name() }}</p>
-  
+
     <input type="text" [value]="name()">
     <button [disabled]="disabled" (click)="clickHandler()">Click me</button>
     <button [disabled]="disabled" (dblclick)="clickHandler()">double Click me</button>
@@ -23,15 +25,17 @@
   <input type="number" [value]="person().age">
   <hr />
 
-  <div *ngIf="name() === 'Andres'">
-    Hola, soy Andres
-  </div>
+  @if (name() === 'Andres') {
+    <div>
+      Hola, soy Andres
+    </div>
+  }
   <!-- Declarativa nueva sintaxis-->
-   @if (name() === 'Andres'){
-     <div>
-       Hola, soy Andres
-     </div>
-   }
+  @if (name() === 'Andres'){
+    <div>
+      Hola, soy Andres
+    </div>
+  }
 
   <h2>If else new</h2>
   @if (person().name === 'Andres' && person().age > 18) {
@@ -44,12 +48,21 @@
     </div>
   }
   <input type="text" [value]="person().name" (change)="changeName($event)">
-  <div [ngSwitch]="person().name">
-    <p *ngSwitchCase="'Andres'">Soy Andres</p>
-    <p *ngSwitchCase="'Nicolas'">Soy Nicolas</p>
-    <p *ngSwitchCase="'Ana'">Soy Ana</p>
-    <p *ngSwitchDefault>yo no soy nadie</p>
-
+  <div>
+    @switch (person().name) {
+      @case ('Andres') {
+        <p>Soy Andres</p>
+      }
+      @case ('Nicolas') {
+        <p>Soy Nicolas</p>
+      }
+      @case ('Ana') {
+        <p>Soy Ana</p>
+      }
+      @default {
+        <p>yo no soy nadie</p>
+      }
+    }
   </div>
 
   <hr />
@@ -77,28 +90,39 @@
 
   <ul>
     <p>total: {{ tasks().length}}</p>
-    <li *ngFor="let task of tasks(); index as i">
-      {{ i }} {{ task }}
-    </li>
+    @for (task of tasks(); track task; let i = $index) {
+      <li>
+        {{ i }} {{ task }}
+      </li>
+    }
   </ul>
 
   <h2>New For</h2>
   <ul>
     @for(task of tasks(); track task; let i = $index){
       <li>{{ i }} {{ task }}</li>
-  
-    } @empty {
+
+      } @empty {
       <li>No hay tareas</li>
     }
   </ul>
 
   <h2>Switch</h2>
-  <div [ngSwitch]="person().name">
-    <p *ngSwitchCase="'Andres'">Soy Andres</p>
-    <p *ngSwitchCase="'Nicolas'">Soy Nicolas</p>
-    <p *ngSwitchCase="'Ana'">Soy Ana</p>
-    <p *ngSwitchDefault>yo no soy nadie</p>
-
+  <div>
+    @switch (person().name) {
+      @case ('Andres') {
+        <p>Soy Andres</p>
+      }
+      @case ('Nicolas') {
+        <p>Soy Nicolas</p>
+      }
+      @case ('Ana') {
+        <p>Soy Ana</p>
+      }
+      @default {
+        <p>yo no soy nadie</p>
+      }
+    }
   </div>
   <h2>New Switch</h2>
   @switch(person().name){
