@@ -26,6 +26,23 @@
   <div *ngIf="name() === 'Andres'">
     Hola, soy Andres
   </div>
+  <!-- Declarativa nueva sintaxis-->
+   @if (name() === 'Andres'){
+     <div>
+       Hola, soy Andres
+     </div>
+   }
+
+  <h2>If else new</h2>
+  @if (person().name === 'Andres' && person().age > 18) {
+    <div>
+      Hola, soy Andres y soy mayor de 18
+    </div>
+  } @else {
+    <div>
+      Hola, soy Andres y soy menor de 18
+    </div>
+  }
   <input type="text" [value]="person().name" (change)="changeName($event)">
   <div [ngSwitch]="person().name">
     <p *ngSwitchCase="'Andres'">Soy Andres</p>
